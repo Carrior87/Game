@@ -18,6 +18,8 @@ public class PlayerController : MonoBehaviour
 
     private KeyCode lastKeyPressed;
     private bool keyIsHeld = false;
+    public string direction = "PointerUp";
+    private string[] directions = { "PointerUp", "PointerRight", "PointerDown", "PointerLeft" };
 
     void Start()
     {
@@ -30,22 +32,28 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            HandleKeyPress(KeyCode.W, "PointerUp");
-        }
-        else if (Input.GetKeyDown(KeyCode.A))
-        {
-            HandleKeyPress(KeyCode.A, "PointerLeft");
-        }
-        else if (Input.GetKeyDown(KeyCode.S))
-        {
-            HandleKeyPress(KeyCode.S, "PointerDown");
-        }
-        else if (Input.GetKeyDown(KeyCode.D))
-        {
-            HandleKeyPress(KeyCode.D, "PointerRight");
-        }
+        if (Input.GetKeyDown(KeyCode.D))
+   	    {
+		    int currentIndex = System.Array.IndexOf(directions, direction);
+		    int nextIndex = (currentIndex + 1) % directions.Length;
+		    direction = directions[nextIndex];
+		    HandleKeyPress(KeyCode.D, direction);
+	    }
+	    else if (Input.GetKeyDown(KeyCode.A))
+	    {
+		    int currentIndex = System.Array.IndexOf(directions, direction);
+		    int previousIndex = (currentIndex - 1 + directions.Length) % directions.Length;
+		    direction = directions[previousIndex];
+		    HandleKeyPress(KeyCode.A, direction);
+	    }
+	    else if (Input.GetKeyDown(KeyCode.W))
+	    {
+		    HandleKeyPress(KeyCode.W, direction);
+	    }
+	    else if (Input.GetKeyDown(KeyCode.S))
+	    {
+		    HandleKeyPress(KeyCode.S, direction);
+	    }
 
         if (Input.GetKeyDown("tab"))
         {
@@ -77,19 +85,19 @@ public class PlayerController : MonoBehaviour
             float horizontalInput = 0f;
             float verticalInput = 0f;
 
-            if (key == KeyCode.W)
+            if (direction == "PointerUp")
             {
                 verticalInput = 1f;
             }
-            else if (key == KeyCode.A)
+            else if (direction == "PointerLeft")
             {
                 horizontalInput = -1f;
             }
-            else if (key == KeyCode.S)
+            else if (direction == "PointerDown")
             {
                 verticalInput = -1f;
             }
-            else if (key == KeyCode.D)
+            else if (direction == "PointerRight")
             {
                 horizontalInput = 1f;
             }
