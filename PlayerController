@@ -1,0 +1,168 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class PlayerController : MonoBehaviour
+{
+    public float moveSpeed = 5f;
+    public Transform movePoint;
+    private bool isMoving = false;
+    private Vector3 previousPosition;
+
+    public LayerMask whatStopsMovement;
+    Color colorGrassOne = new Color32(0x1A, 0x6A, 0x1C, 0xFF);
+    Color colorGrassTwo = new Color32(0x23, 0x81, 0x26, 0xFF);
+
+    public GameObject pointer;
+    public string pointerValue;
+
+    private KeyCode lastKeyPressed;
+    private bool keyIsHeld = false;
+
+    void Start()
+    {
+        pointer = GameObject.FindWithTag("Player");
+        movePoint.parent = null;
+        movePoint.position = new Vector3(12, 1, 0);
+        transform.position = Vector3.MoveTowards(transform.position, movePoint.position, 1000 * Time.deltaTime);
+        previousPosition = transform.position;
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            HandleKeyPress(KeyCode.W, "PointerUp");
+        }
+        else if (Input.GetKeyDown(KeyCode.A))
+        {
+            HandleKeyPress(KeyCode.A, "PointerLeft");
+        }
+        else if (Input.GetKeyDown(KeyCode.S))
+        {
+            HandleKeyPress(KeyCode.S, "PointerDown");
+        }
+        else if (Input.GetKeyDown(KeyCode.D))
+        {
+            HandleKeyPress(KeyCode.D, "PointerRight");
+        }
+
+        if (Input.GetKeyDown("tab"))
+        {
+            MenuManager.Instance.showMenu();
+        }
+
+        keyIsHeld = Input.GetKey(lastKeyPressed);
+    }
+
+    void HandleKeyPress(KeyCode key, string direction)
+    {
+        if (!isMoving)
+        {
+            lastKeyPressed = key;
+            pointerValue = direction;
+            SpriteManager.Instance.RotatePlayer(direction);
+            StartCoroutine(MoveWithDelay(key, direction));
+        }
+    }
+
+    IEnumerator MoveWithDelay(KeyCode key, string direction)
+    {
+        yield return new WaitForSeconds(0.15f);
+
+        while (keyIsHeld && pointerValue == direction)
+        {
+            isMoving = true;
+
+            float horizontalInput = 0f;
+            float verticalInput = 0f;
+
+            if (key == KeyCode.W)
+            {
+                verticalInput = 1f;
+            }
+            else if (key == KeyCode.A)
+            {
+                horizontalInput = -1f;
+            }
+            else if (key == KeyCode.S)
+            {
+                verticalInput = -1f;
+            }
+            else if (key == KeyCode.D)
+            {
+                horizontalInput = 1f;
+            }
+
+            if (Mathf.Abs(horizontalInput) == 1f || Mathf.Abs(verticalInput) == 1f)
+            {
+                Vector3 targetPosition = movePoint.position + new Vector3(horizontalInput, verticalInput, 0f);
+
+                RaycastHit2D hit = Physics2D.Linecast(movePoint.position, targetPosition, whatStopsMovement);
+                if (hit.collider == null)
+                {
+                    yield return new WaitForSeconds(0.2f);
+
+                    while (Vector3.Distance(transform.position, targetPosition) > .05f)
+                    {
+                        transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
+                        yield return null;
+
+                        if (HasMovedToDifferentTile())
+                        {
+                            ChangeTileColorsAroundPlayer(movePoint.position);
+                        }
+                    }
+
+                    movePoint.position = targetPosition;
+                    ChangeTileColorsAroundPlayer(movePoint.position);
+                }
+            }
+
+            yield return null; // Wait for the next frame to re-check input
+        }
+
+        isMoving = false;
+    }
+
+    bool HasMovedToDifferentTile()
+    {
+        Vector3 currentGridPos = new Vector3(Mathf.Floor(movePoint.position.x), Mathf.Floor(movePoint.position.y), 0);
+        Vector3 previousGridPos = new Vector3(Mathf.Floor(previousPosition.x), Mathf.Floor(previousPosition.y), 0);
+
+        bool hasMoved = currentGridPos != previousGridPos;
+        if (hasMoved)
+        {
+            previousPosition = movePoint.position;
+        }
+
+        return hasMoved;
+    }
+
+    void ChangeTileColorsAroundPlayer(Vector3 centerPosition)
+    {
+        List<Vector3> positionsToColor = new List<Vector3>
+        {
+            centerPosition,
+            centerPosition + Vector3.up,
+            centerPosition + Vector3.down,
+            centerPosition + Vector3.left,
+            centerPosition + Vector3.right,
+            centerPosition + Vector3.up + Vector3.left,    // top-left diagonal
+            centerPosition + Vector3.up + Vector3.right,   // top-right diagonal
+            centerPosition + Vector3.down + Vector3.left,  // bottom-left diagonal
+            centerPosition + Vector3.down + Vector3.right  // bottom-right diagonal
+        };
+
+        foreach (Vector3 position in positionsToColor)
+        {
+            bool isOffset = (position.x + position.y) % 2 == 1;
+            ChangeTileColor(position, isOffset ? colorGrassOne : colorGrassTwo);
+        }
+    }
+
+    void ChangeTileColor(Vector3 position, Color color)
+    {
+        GridManager.Instance.GetTileAtPosition(position)?.ChangeTileColor(color);
+    }
+}
