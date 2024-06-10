@@ -33,34 +33,34 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.D))
-   	    {
-		    int currentIndex = System.Array.IndexOf(directions, direction);
-		    int nextIndex = (currentIndex + 1) % directions.Length;
-		    direction = directions[nextIndex];
-		    HandleKeyPress(KeyCode.D, direction);
-	    }
-	    else if (Input.GetKeyDown(KeyCode.A))
-	    {
-		    int currentIndex = System.Array.IndexOf(directions, direction);
-		    int previousIndex = (currentIndex - 1 + directions.Length) % directions.Length;
-		    direction = directions[previousIndex];
-		    HandleKeyPress(KeyCode.A, direction);
-	    }
-	    else if (Input.GetKeyDown(KeyCode.W))
-	    {
-		    HandleKeyPress(KeyCode.W, direction);
-	    }
-	    else if (Input.GetKeyDown(KeyCode.S))
-	    {
-		    HandleKeyPress(KeyCode.S, direction);
-	    }
+        {
+            int currentIndex = System.Array.IndexOf(directions, direction);
+            int nextIndex = (currentIndex + 1) % directions.Length;
+            direction = directions[nextIndex];
+            HandleKeyPress(KeyCode.D, direction);
+        }
+        else if (Input.GetKeyDown(KeyCode.A))
+        {
+            int currentIndex = System.Array.IndexOf(directions, direction);
+            int previousIndex = (currentIndex - 1 + directions.Length) % directions.Length;
+            direction = directions[previousIndex];
+            HandleKeyPress(KeyCode.A, direction);
+        }
+        else if (Input.GetKeyDown(KeyCode.W))
+        {
+            HandleKeyPress(KeyCode.W, direction);
+        }
+        else if (Input.GetKeyDown(KeyCode.S))
+        {
+            HandleKeyPress(KeyCode.S, direction);
+        }
 
-        if (Input.GetKeyDown("tab"))
+        if (Input.GetKeyDown(KeyCode.Tab))
         {
             MenuManager.Instance.showMenu();
         }
 
-        keyIsHeld = Input.GetKey(lastKeyPressed);
+        keyIsHeld = Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D);
     }
 
     void HandleKeyPress(KeyCode key, string direction)
@@ -127,7 +127,7 @@ public class PlayerController : MonoBehaviour
                 }
             }
 
-            yield return null; // Wait for the next frame to re-check input
+            yield return null;
         }
 
         isMoving = false;
