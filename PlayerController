@@ -52,7 +52,8 @@ public class PlayerController : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.S))
         {
-            HandleKeyPress(KeyCode.S, direction);
+            string oppositeDirection = GetOppositeDirection(direction);
+            HandleKeyPress(KeyCode.S, oppositeDirection);
         }
 
         if (Input.GetKeyDown(KeyCode.Tab))
@@ -133,6 +134,23 @@ public class PlayerController : MonoBehaviour
         isMoving = false;
     }
 
+    string GetOppositeDirection(string direction)
+    {
+        switch (direction)
+        {
+            case "PointerUp":
+                return "PointerDown";
+            case "PointerLeft":
+                return "PointerRight";
+            case "PointerDown":
+                return "PointerUp";
+            case "PointerRight":
+                return "PointerLeft";
+            default:
+                return direction;
+        }
+    }
+    
     bool HasMovedToDifferentTile()
     {
         Vector3 currentGridPos = new Vector3(Mathf.Floor(movePoint.position.x), Mathf.Floor(movePoint.position.y), 0);
