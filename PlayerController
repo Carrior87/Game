@@ -60,7 +60,7 @@ public class PlayerController : MonoBehaviour
             MenuManager.Instance.showMenu();
         }
 
-        keyIsHeld = Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D);
+        keyIsHeld = Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S);
     }
 
     void HandleKeyPress(KeyCode key, string direction)
