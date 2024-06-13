@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     public string pointerValue;
     private bool inputEnabled = true;
 
+
     private KeyCode lastKeyPressed;
     private bool keyIsHeld = false;
     public string direction = "PointerUp";
@@ -43,7 +44,6 @@ public class PlayerController : MonoBehaviour
                 SpriteManager.Instance.RotatePlayer(direction);
                 HandleKeyPress(KeyCode.D, direction);
                 inputEnabled = false;
-                StartCoroutine(ReenableInputAfterDelay(1.0f));
             }
             else if (Input.GetKeyDown(KeyCode.A))
             {
@@ -53,29 +53,26 @@ public class PlayerController : MonoBehaviour
                 SpriteManager.Instance.RotatePlayer(direction);
                 HandleKeyPress(KeyCode.A, direction);
                 inputEnabled = false;
-                StartCoroutine(ReenableInputAfterDelay(1.0f));
             }
             else if (Input.GetKeyDown(KeyCode.W))
             {
                 HandleKeyPress(KeyCode.W, direction);
                 inputEnabled = false;
-                StartCoroutine(ReenableInputAfterDelay(1.0f));
             }
             else if (Input.GetKeyDown(KeyCode.S))
             {
                 string oppositeDirection = GetOppositeDirection(direction);
                 HandleKeyPress(KeyCode.S, oppositeDirection);
                 inputEnabled = false;
-                StartCoroutine(ReenableInputAfterDelay(1.0f));
             }
-
-            keyIsHeld = Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S);
         }
 
         if (Input.GetKeyDown(KeyCode.Tab))
         {
             MenuManager.Instance.showMenu();
         }
+
+        keyIsHeld = Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S);
     }
 
     void HandleKeyPress(KeyCode key, string direction)
@@ -143,14 +140,9 @@ public class PlayerController : MonoBehaviour
 
             yield return null;
         }
+
         inputEnabled = true;
         isMoving = false;
-    }
-
-    IEnumerator ReenableInputAfterDelay(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        inputEnabled = true;
     }
 
     string GetOppositeDirection(string direction)
@@ -169,7 +161,7 @@ public class PlayerController : MonoBehaviour
                 return direction;
         }
     }
-    
+
     bool HasMovedToDifferentTile()
     {
         Vector3 currentGridPos = new Vector3(Mathf.Floor(movePoint.position.x), Mathf.Floor(movePoint.position.y), 0);
