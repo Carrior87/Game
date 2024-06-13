@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
 
     public GameObject pointer;
     public string pointerValue;
+    private bool inputEnabled = true;
 
     private KeyCode lastKeyPressed;
     private bool keyIsHeld = false;
@@ -32,38 +33,49 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.D))
+        if (inputEnabled)
         {
-            int currentIndex = System.Array.IndexOf(directions, direction);
-            int nextIndex = (currentIndex + 1) % directions.Length;
-            direction = directions[nextIndex];
-            SpriteManager.Instance.RotatePlayer(direction);
-            HandleKeyPress(KeyCode.D, direction);
-        }
-        else if (Input.GetKeyDown(KeyCode.A))
-        {
-            int currentIndex = System.Array.IndexOf(directions, direction);
-            int previousIndex = (currentIndex - 1 + directions.Length) % directions.Length;
-            direction = directions[previousIndex];
-            SpriteManager.Instance.RotatePlayer(direction);
-            HandleKeyPress(KeyCode.A, direction);
-        }
-        else if (Input.GetKeyDown(KeyCode.W))
-        {
-            HandleKeyPress(KeyCode.W, direction);
-        }
-        else if (Input.GetKeyDown(KeyCode.S))
-        {
-            string oppositeDirection = GetOppositeDirection(direction);
-            HandleKeyPress(KeyCode.S, oppositeDirection);
+            if (Input.GetKeyDown(KeyCode.D))
+            {
+                int currentIndex = System.Array.IndexOf(directions, direction);
+                int nextIndex = (currentIndex + 1) % directions.Length;
+                direction = directions[nextIndex];
+                SpriteManager.Instance.RotatePlayer(direction);
+                HandleKeyPress(KeyCode.D, direction);
+                inputEnabled = false;
+                StartCoroutine(ReenableInputAfterDelay(1.0f));
+            }
+            else if (Input.GetKeyDown(KeyCode.A))
+            {
+                int currentIndex = System.Array.IndexOf(directions, direction);
+                int previousIndex = (currentIndex - 1 + directions.Length) % directions.Length;
+                direction = directions[previousIndex];
+                SpriteManager.Instance.RotatePlayer(direction);
+                HandleKeyPress(KeyCode.A, direction);
+                inputEnabled = false;
+                StartCoroutine(ReenableInputAfterDelay(1.0f));
+            }
+            else if (Input.GetKeyDown(KeyCode.W))
+            {
+                HandleKeyPress(KeyCode.W, direction);
+                inputEnabled = false;
+                StartCoroutine(ReenableInputAfterDelay(1.0f));
+            }
+            else if (Input.GetKeyDown(KeyCode.S))
+            {
+                string oppositeDirection = GetOppositeDirection(direction);
+                HandleKeyPress(KeyCode.S, oppositeDirection);
+                inputEnabled = false;
+                StartCoroutine(ReenableInputAfterDelay(1.0f));
+            }
+
+            keyIsHeld = Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S);
         }
 
         if (Input.GetKeyDown(KeyCode.Tab))
         {
             MenuManager.Instance.showMenu();
         }
-
-        keyIsHeld = Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S);
     }
 
     void HandleKeyPress(KeyCode key, string direction)
@@ -131,8 +143,14 @@ public class PlayerController : MonoBehaviour
 
             yield return null;
         }
-
+        inputEnabled = true;
         isMoving = false;
+    }
+
+    IEnumerator ReenableInputAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        inputEnabled = true;
     }
 
     string GetOppositeDirection(string direction)
