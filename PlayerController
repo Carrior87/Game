@@ -17,7 +17,6 @@ public class PlayerController : MonoBehaviour
     public string pointerValue;
     private bool inputEnabled = true;
 
-
     private KeyCode lastKeyPressed;
     private bool keyIsHeld = false;
     public string direction = "PointerUp";
@@ -87,7 +86,7 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator MoveWithDelay(KeyCode key, string direction)
     {
-        yield return new WaitForSeconds(0.15f);
+        yield return new WaitForSeconds(0.1f);
 
         while (keyIsHeld && pointerValue == direction)
         {
@@ -120,7 +119,7 @@ public class PlayerController : MonoBehaviour
                 RaycastHit2D hit = Physics2D.Linecast(movePoint.position, targetPosition, whatStopsMovement);
                 if (hit.collider == null)
                 {
-                    yield return new WaitForSeconds(0.2f);
+                    yield return new WaitForSeconds(0.23f);
 
                     while (Vector3.Distance(transform.position, targetPosition) > .05f)
                     {
@@ -141,8 +140,8 @@ public class PlayerController : MonoBehaviour
             yield return null;
         }
 
-        inputEnabled = true;
         isMoving = false;
+        inputEnabled = true;
     }
 
     string GetOppositeDirection(string direction)
