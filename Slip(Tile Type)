@@ -1,0 +1,47 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Slip : Tile
+{
+    public GameObject player;
+
+    void Start()
+    {
+        player = GameObject.FindWithTag("Player");
+        Debug.Log($"Player: {player}");
+        if (player == null)
+        {
+            Debug.LogError("Player GameObject not found!");
+        }
+    }
+
+    void Update()
+    {
+        if (IsPlayerOnTile())
+        {
+            Debug.Log("Player is on the slip tile!");// activate whatever its supposed to do
+        }
+    }
+
+    bool IsPlayerOnTile()
+    {
+        if (player == null)
+        {
+            Debug.LogError("Player GameObject is null!");
+            return false;
+        }
+
+        Vector3 playerPos = player.transform.position;
+        Vector3 slipTilePos = transform.position;
+
+        // Check if the player's position is within a small distance of the return tile or its neighbor
+        float distanceThreshold = 0.1f; // Adjust this threshold as needed
+        if (Vector3.Distance(playerPos, slipTilePos) < distanceThreshold)
+        {
+            return true;
+        }
+
+        return false;
+    }
+}
