@@ -1,0 +1,109 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class MenuManager : MonoBehaviour
+{
+    public static MenuManager Instance;
+    public GameObject menu;
+    bool valueTab = false;
+    [SerializeField] private GameObject _selectedHeroObject, _tileObject, _tileUnitObject;
+
+    // Store the currently selected tile
+    private Tile tile;
+
+    private GameObject[] menus;
+
+    void Awake()
+    {
+        Instance = this;
+    }
+
+    void Start()
+    {
+        menus = GameObject.FindGameObjectsWithTag("Menu");
+
+        if (menus.Length == 0)
+        {
+            Debug.LogError("No Menu GameObjects found!");
+        }
+
+        // Assign the first menu found to the menu field, if it's not assigned
+        if (menu == null && menus.Length > 0)
+        {
+            menu = menus[0];
+        }
+
+        // Deactivate all menus initially
+        foreach (GameObject menuObj in menus)
+        {
+            Debug.Log($"Menu: {menuObj}");
+            menuObj.SetActive(false);
+        }
+    }
+
+    // Update the currently selected tile
+    void Update()
+    {
+        // Check if there's a currently selected tile
+        if (tile != null)
+        {
+            // Update tile information based on any changes in the game state
+            //ShowTileInfo(tile);
+        }
+    }
+
+
+    //if (Input.GetKeyDown("w"))
+    //{
+    //      spriteRenderer.sprite = spriteArray[0];
+    //}
+
+
+    public void showMenu()
+    {
+        valueTab = !valueTab;
+        foreach (GameObject menuObj in menus)
+        {
+            menuObj.SetActive(valueTab);
+        }
+    }
+
+    // Show information about the selected tile and unit (if any)
+    public void ShowTileInfo(Tile tile)
+    {
+        if (tile == null)
+        {
+            _tileObject.SetActive(false);
+            _tileUnitObject.SetActive(false);
+            return;
+        }
+
+        _tileObject.GetComponentInChildren<Text>().text = tile.TileName;
+        _tileObject.SetActive(true);
+
+        if (tile.OccupiedUnit)
+        {
+            _tileUnitObject.GetComponentInChildren<Text>().text = tile.OccupiedUnit.UnitName;
+            _tileUnitObject.SetActive(true);
+        }
+        else
+        {
+            _tileUnitObject.SetActive(false);
+        }
+    }
+
+    // Show information about the selected hero
+    public void ShowSelectedHero(BaseHero hero)
+    {
+        if (hero == null)
+        {
+            _selectedHeroObject.SetActive(false);
+            return;
+        }
+
+        _selectedHeroObject.GetComponentInChildren<Text>().text = hero.UnitName;
+        _selectedHeroObject.SetActive(true);
+    }
+}
