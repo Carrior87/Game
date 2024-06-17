@@ -7,6 +7,7 @@ public class Return : Tile
     public GameObject player;
     int tileHeight = 1;
     int tileWidth = 1;
+    private bool reNull = true;
 
     void Start()
     {
@@ -20,9 +21,11 @@ public class Return : Tile
 
     void Update()
     {
-        if (IsPlayerOnTile())
+        if (IsPlayerOnTile()&& reNull)
         {
             Debug.Log("Player is on the return tile!");// activate whatever its supposed to do
+            MenuManager.Instance.showAcceptMenu();// menu hasnt been made yet or added to menu manager
+            reNull = false;
         }
     }
 
@@ -55,6 +58,7 @@ public class Return : Tile
             return true;
         }
 
+        reNull = true;
         return false;
     }
 }
