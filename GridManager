@@ -98,21 +98,21 @@ public class GridManager : MonoBehaviour
                         if (level == 1)
                         {
                             array[level, x, y] = type;
-                            Debug.Log("Coordinates set for level " + level+ " of type " + type + " at index [" + x + ", " + y + "]");
+                            //Debug.Log("Coordinates set for level " + level+ " of type " + type + " at index [" + x + ", " + y + "]");
                         }
                         else
                         {
-                            Debug.Log("Skipping coordinate " + line);
+                            //Debug.Log("Skipping coordinate " + line);
                         }
                     }
                     else
                     {
-                        Debug.LogError("Failed to parse coordinates in line: " + line);
+                        //Debug.LogError("Failed to parse coordinates in line: " + line);
                     }
                 }
                 else
                 {
-                    Debug.LogError("Invalid coordinate format in line: " + line);
+                    //Debug.LogError("Invalid coordinate format in line: " + line);
                 }
             }
         }
