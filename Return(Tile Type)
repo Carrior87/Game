@@ -24,7 +24,7 @@ public class Return : Tile
         if (IsPlayerOnTile()&& reNull)
         {
             Debug.Log("Player is on the return tile!");// activate whatever its supposed to do
-            MenuManager.Instance.showAcceptMenu();// menu hasnt been made yet or added to menu manager
+            MenuManager.Instance.showAcceptMenu(IsPlayerOnTile());// menu hasnt been made yet or added to menu manager
             reNull = false;
         }
     }
