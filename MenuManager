@@ -8,6 +8,8 @@ public class MenuManager : MonoBehaviour
     public static MenuManager Instance;
     public GameObject menu;
     bool valueTab = false;
+    public GameObject accMenu;
+    bool accValue = false;
     [SerializeField] private GameObject _selectedHeroObject, _tileObject, _tileUnitObject;
 
     // Store the currently selected tile
@@ -23,7 +25,9 @@ public class MenuManager : MonoBehaviour
     void Start()
     {
         menus = GameObject.FindGameObjectsWithTag("Menu");
+        accMenu = GameObject.FindGameObjectWithTag("AccMenu");
 
+        // Menu Handling
         if (menus.Length == 0)
         {
             Debug.LogError("No Menu GameObjects found!");
@@ -41,6 +45,16 @@ public class MenuManager : MonoBehaviour
             Debug.Log($"Menu: {menuObj}");
             menuObj.SetActive(false);
         }
+
+        // Accept Menu Handling
+        if (accMenu == null)
+        {
+            Debug.LogError("Accept Menu GameObject not found!");
+        }
+        else
+        {
+            accMenu.SetActive(false);
+        }
     }
 
     // Update the currently selected tile
@@ -55,12 +69,6 @@ public class MenuManager : MonoBehaviour
     }
 
 
-    //if (Input.GetKeyDown("w"))
-    //{
-    //      spriteRenderer.sprite = spriteArray[0];
-    //}
-
-
     public void showMenu()
     {
         valueTab = !valueTab;
@@ -68,6 +76,19 @@ public class MenuManager : MonoBehaviour
         {
             menuObj.SetActive(valueTab);
         }
+    }
+
+    public void showAcceptMenu(bool isplayer)
+    {
+	    if(isplayer)
+	    {
+	        accMenu.SetActive(true);
+	        accValue = true;
+	    }else
+	    {
+	        accMenu.SetActive(false);
+	        accValue = false;
+	    }
     }
 
     // Show information about the selected tile and unit (if any)
