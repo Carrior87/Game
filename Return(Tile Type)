@@ -1,18 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Return : Tile
 {
-    public GameObject player;
+    private GameObject player;
     int tileHeight = 1;
     int tileWidth = 1;
-    private bool reNull = true;
+    private float distanceThreshold = 1.0f; // Adjust based on your game's needs
 
     void Start()
     {
         player = GameObject.FindWithTag("Player");
-        Debug.Log($"Player: {player}");
         if (player == null)
         {
             Debug.LogError("Player GameObject not found!");
@@ -21,12 +18,8 @@ public class Return : Tile
 
     void Update()
     {
-        if (IsPlayerOnTile()&& reNull)
-        {
-            Debug.Log("Player is on the return tile!");// activate whatever its supposed to do
-            MenuManager.Instance.showAcceptMenu(IsPlayerOnTile());// menu hasnt been made yet or added to menu manager
-            reNull = false;
-        }
+        bool isPlayerOnTile = IsPlayerOnTile();
+        MenuManager.Instance.showAcceptMenu(isPlayerOnTile);
     }
 
     bool IsPlayerOnTile()
@@ -38,27 +31,30 @@ public class Return : Tile
         }
 
         Vector3 playerPos = player.transform.position;
-        Vector3 returnTilePos = transform.position;
 
-        // Check if the player's position is within a small distance of the return tile or its neighbor
-        float distanceThreshold = 0.1f; // Adjust this threshold as needed
-        if (Vector3.Distance(playerPos, returnTilePos) < distanceThreshold)
+        // Find all game objects with the "ReturnTile" tag
+        GameObject[] returnTiles = GameObject.FindGameObjectsWithTag("ReturnTile");
+
+        foreach (GameObject returnTile in returnTiles)
         {
-            return true;
+            Vector3 returnTilePos = returnTile.transform.position;
+
+            // Check if the player's position is within a small distance of the neighboring tile
+            Vector3 rightTilePos = returnTilePos + new Vector3(tileWidth, 0, 0);
+            Vector3 leftTilePos = returnTilePos - new Vector3(tileWidth, 0, 0);
+            Vector3 upTilePos = returnTilePos + new Vector3(0, tileHeight, 0);
+            Vector3 downTilePos = returnTilePos - new Vector3(0, tileHeight, 0);
+
+            // Check if the player is close enough to this return tile
+            if (Vector3.Distance(playerPos, rightTilePos) < distanceThreshold ||
+            Vector3.Distance(playerPos, leftTilePos) < distanceThreshold ||
+            Vector3.Distance(playerPos, upTilePos) < distanceThreshold ||
+            Vector3.Distance(playerPos, downTilePos) < distanceThreshold)
+            {
+                return true;
+            }
         }
 
-        // Check if the player's position is within a small distance of the neighboring tile
-        Vector3 rightTilePos = returnTilePos + new Vector3(tileWidth, 0, 0);
-        Vector3 leftTilePos = returnTilePos - new Vector3(tileWidth, 0, 0);
-        Vector3 upTilePos = returnTilePos + new Vector3(0, tileHeight, 0);
-        Vector3 downTilePos = returnTilePos - new Vector3(0, tileHeight, 0);
-
-        if (Vector3.Distance(playerPos, rightTilePos) < distanceThreshold || Vector3.Distance(playerPos, leftTilePos) < distanceThreshold|| Vector3.Distance(playerPos, upTilePos) < distanceThreshold|| Vector3.Distance(playerPos, downTilePos) < distanceThreshold)
-        {
-            return true;
-        }
-
-        reNull = true;
         return false;
     }
 }
