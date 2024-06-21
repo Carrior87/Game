@@ -78,17 +78,18 @@ public class MenuManager : MonoBehaviour
         }
     }
 
-    public void showAcceptMenu(bool isplayer)
+    public void showAcceptMenu(bool isPlayer)
     {
-	    if(isplayer)
-	    {
-	        accMenu.SetActive(true);
-	        accValue = true;
-	    }else
-	    {
-	        accMenu.SetActive(false);
-	        accValue = false;
-	    }
+        if (isPlayer)
+        {
+            accMenu.SetActive(isPlayer);
+            accValue = isPlayer;
+        }
+        else
+        {
+            accMenu.SetActive(false);
+            accValue = false;
+        }
     }
 
     // Show information about the selected tile and unit (if any)
