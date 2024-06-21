@@ -16,6 +16,7 @@ public class GridManager : MonoBehaviour
     [SerializeField] private Transform _cam;
 
     private Dictionary<Vector2, Tile> _tiles;
+    static List<Vector2Int> returnTileCoordinates = new List<Vector2Int>();
 
     void Awake()
     {
@@ -42,7 +43,7 @@ public class GridManager : MonoBehaviour
                 //var placeTile = tileCoords[Level, x, y] == 1 ? _mountainTile : _grassTile;
                 Tile placeTile;
 
-                switch(tileCoords[Level, x, y])
+                switch (tileCoords[Level, x, y])
                 {
                     case 1:
                         placeTile = _mountainTile;
@@ -67,6 +68,12 @@ public class GridManager : MonoBehaviour
                 spawnedTile.name = $"Tile {x} {y}";
 
                 spawnedTile.Init(x, y);
+
+                // Tag return tiles
+                if (tileCoords[Level, x, y] == 2)
+                {
+                    spawnedTile.gameObject.tag = "ReturnTile";
+                }
 
                 _tiles[new Vector2(x, y)] = spawnedTile;
             }
@@ -99,6 +106,10 @@ public class GridManager : MonoBehaviour
                         {
                             array[level, x, y] = type;
                             //Debug.Log("Coordinates set for level " + level+ " of type " + type + " at index [" + x + ", " + y + "]");
+                            if (type == 2)
+                            {
+                                returnTileCoordinates.Add(new Vector2Int(x, y));
+                            }
                         }
                         else
                         {
