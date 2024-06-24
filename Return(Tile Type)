@@ -5,7 +5,7 @@ public class Return : Tile
     private GameObject player;
     int tileHeight = 1;
     int tileWidth = 1;
-    private float distanceThreshold = 1.0f; // Adjust based on your game's needs
+    private float distanceThreshold = 0.5f; // Adjust based on your game's needs
 
     void Start()
     {
@@ -53,6 +53,7 @@ public class Return : Tile
             {
                 return true;
             }
+
         }
 
         return false;
