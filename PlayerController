@@ -25,11 +25,12 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         pointer = GameObject.FindWithTag("Player");
-	    accMenu = GameObject.FindGameObjectWithTag("AccMenu");
         movePoint.parent = null;
         movePoint.position = new Vector3(12, 1, 0);
         transform.position = Vector3.MoveTowards(transform.position, movePoint.position, 1000 * Time.deltaTime);
         previousPosition = transform.position;
+
+        ChangeTileColorsAroundPlayer(movePoint.position);
     }
 
     void Update()
@@ -72,10 +73,10 @@ public class PlayerController : MonoBehaviour
             MenuManager.Instance.showMenu();
         }
 
-	    if (accMenu.activeSelf == true && Input.GetKeyDown(KeyCode.Space)) 
-    	{
-	        Debug.Log("Accept Menu has been pressed");
-    	}
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Debug.Log("Space has been pressed");
+        }
 
         keyIsHeld = Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S);
     }
