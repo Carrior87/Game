@@ -9,7 +9,6 @@ public class MenuManager : MonoBehaviour
     public GameObject menu;
     bool valueTab = false;
     public GameObject accMenu;
-    bool accValue = false;
     [SerializeField] private GameObject _selectedHeroObject, _tileObject, _tileUnitObject;
 
     // Store the currently selected tile
@@ -80,15 +79,9 @@ public class MenuManager : MonoBehaviour
 
     public void showAcceptMenu(bool isPlayer)
     {
-        if (isPlayer)
+        if (accMenu.activeSelf != isPlayer)
         {
             accMenu.SetActive(isPlayer);
-            accValue = isPlayer;
-        }
-        else
-        {
-            accMenu.SetActive(false);
-            accValue = false;
         }
     }
 
