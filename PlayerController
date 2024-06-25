@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (inputEnabled)
+        if (GameManager.Instance.IsPlayerTurn() && inputEnabled)
         {
             if (Input.GetKeyDown(KeyCode.D))
             {
