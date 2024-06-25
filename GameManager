@@ -34,8 +34,10 @@ public class GameManager : MonoBehaviour
                 UnitManager.Instance.SpawnEnemies();
                 break;
             case GameState.HeroesTurn:
+                // Code to handle the start of the player's turn
                 break;
             case GameState.EnemiesTurn:
+                // Code to handle the start of the enemy's turn
                 break;
             case GameState.Interaction:
                 break;
@@ -45,6 +47,23 @@ public class GameManager : MonoBehaviour
                 throw new ArgumentOutOfRangeException(nameof(newState), newState, null);
         }
     }
+
+    public bool IsPlayerTurn()
+    {
+        return GameState == GameState.HeroesTurn;
+    }
+
+    public void EndPlayerTurn()
+    {
+        ChangeState(GameState.EnemiesTurn);
+        // Add logic to handle the start of the enemy's turn
+    }
+
+    public void EndEnemyTurn()
+    {
+        ChangeState(GameState.HeroesTurn);
+        // Add logic to handle the start of the player's turn
+    }
 }
 
 public enum GameState
@@ -53,5 +72,7 @@ public enum GameState
     SpawnHeroes = 1,
     SpawnEnemies = 2,
     HeroesTurn = 3,
-    EnemiesTurn = 4
+    EnemiesTurn = 4,
+    Interaction = 5,
+    Battle = 6
 }
