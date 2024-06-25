@@ -141,6 +141,10 @@ public class PlayerController : MonoBehaviour
 
                     movePoint.position = targetPosition;
                     ChangeTileColorsAroundPlayer(movePoint.position);
+
+                    // End the player's turn after moving
+                    GameManager.Instance.EndPlayerTurn();
+                    yield break;
                 }
             }
 
