@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (GameManager.Instance.IsPlayerTurn() && inputEnabled)
+        if (GameManager.Instance.IsPlayerTurn()) //&& inputEnabled)
         {
             if (Input.GetKeyDown(KeyCode.D))
             {
@@ -44,7 +44,7 @@ public class PlayerController : MonoBehaviour
                 direction = directions[nextIndex];
                 SpriteManager.Instance.RotatePlayer(direction);
                 HandleKeyPress(KeyCode.D, direction);
-                inputEnabled = false;
+                //inputEnabled = false;
             }
             else if (Input.GetKeyDown(KeyCode.A))
             {
@@ -53,18 +53,18 @@ public class PlayerController : MonoBehaviour
                 direction = directions[previousIndex];
                 SpriteManager.Instance.RotatePlayer(direction);
                 HandleKeyPress(KeyCode.A, direction);
-                inputEnabled = false;
+                //inputEnabled = false;
             }
             else if (Input.GetKeyDown(KeyCode.W))
             {
                 HandleKeyPress(KeyCode.W, direction);
-                inputEnabled = false;
+                //inputEnabled = false;
             }
             else if (Input.GetKeyDown(KeyCode.S))
             {
                 string oppositeDirection = GetOppositeDirection(direction);
                 HandleKeyPress(KeyCode.S, oppositeDirection);
-                inputEnabled = false;
+                //inputEnabled = false;
             }
         }
 
@@ -152,7 +152,7 @@ public class PlayerController : MonoBehaviour
         }
 
         isMoving = false;
-        inputEnabled = true;
+        //inputEnabled = true;
     }
 
     string GetOppositeDirection(string direction)
