@@ -1,0 +1,46 @@
+void Start()
+    {
+        pointer = GameObject.FindWithTag("Enemy");
+        movePoint.parent = null;
+        movePoint.position = new Vector3(12, 1, 0);
+        transform.position = Vector3.MoveTowards(transform.position, movePoint.position, 1000 * Time.deltaTime);
+        previousPosition = transform.position;
+    }
+
+
+
+
+
+
+IEnumerator EnemyMoveDelay
+{
+
+	foreach (enemy in enemyID) //enemy and enemyID are place holder names
+	{
+		movePoint.position = enemyPosition; //enemyPosition would be something that is on each enemy per ID
+	
+		if (Mathf.Abs(horizontalInput) == 1f || Mathf.Abs(VerticalInput) == 1f)
+		{
+			Vector3 targetPosition = movePoint.position + new Vector3(horizontalInput, verticalInput, 0f);
+	
+			RaycastHit2D hit = Physics2D.Linecast(movePoint.position, targetPosition, whatStopsMovement);
+			if (hit.collider == null)
+			{
+				yield return new WaitForSeconds(0.2f);
+	
+				while (Vector3.Distance(transform.position, targetPosition) > .05f)
+				{
+					transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
+					yield return null;
+				}
+			
+				movePoint.position = targetPosition;
+			}
+		}
+	}
+	
+	// End the enemies turn after moving
+	GameManager.Instance.EndPlayerTurn();
+	yield break;
+
+}
