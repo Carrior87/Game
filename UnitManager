@@ -28,6 +28,10 @@ public class UnitManager : MonoBehaviour
             var spawnedHero = Instantiate(randomPrefab);
             var randomSpawnTile = GridManager.Instance.GetHeroSpawnTile();
 
+            Enemy enemyScript = spawnedEnemy.GetComponent<Enemy>();
+            enemyScript.enemyID = nextEnemyID;
+            nextEnemyID++;
+
             //randomSpawnTile.SetUnit(spawnedHero);
         }
 
