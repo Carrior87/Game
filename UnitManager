@@ -11,6 +11,8 @@ public class UnitManager : MonoBehaviour
     private List<ScriptableUnit> _units;
     public BaseHero SelectedHero;
 
+    public int nextEnemyID = 0;
+
     void Awake()
     {
         Instance = this;
