@@ -81,7 +81,8 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    public GameObject enemyPrefab; // Assign the enemy prefab in the inspector
+    public GameObject enemyPrefab; // Assign the enemy prefab in the inspector. Or the list of enemies can be aquired by
+				   // looking for the faction tag of enemy
 
     void Start()
     {
