@@ -1,15 +1,13 @@
+//Enemy move tracker. would go into EnemyController taken from PlayerController
+
 void Start()
     {
-        pointer = GameObject.FindWithTag("Enemy");
+        listOfEnemies = GameObject.FindWithTag("Enemy");
         movePoint.parent = null;
         movePoint.position = new Vector3(12, 1, 0);
         transform.position = Vector3.MoveTowards(transform.position, movePoint.position, 1000 * Time.deltaTime);
         previousPosition = transform.position;
     }
-
-
-
-
 
 
 IEnumerator EnemyMoveDelay
@@ -43,4 +41,71 @@ IEnumerator EnemyMoveDelay
 	GameManager.Instance.EndPlayerTurn();
 	yield break;
 
+}
+
+
+
+
+
+
+//Enemy spawning and creating enemy behavior specific to how each would move
+
+using UnityEngine;
+
+public class Enemy : MonoBehaviour
+{
+    public Vector3[] waypoints; // Array of waypoints for the enemy to follow
+    private int currentWaypointIndex = 0;
+    private float moveSpeed = 2.0f;
+
+    void Update()
+    {
+        if (currentWaypointIndex < waypoints.Length)
+        {
+            // Move towards the next waypoint
+            transform.position = Vector3.MoveTowards(transform.position, waypoints[currentWaypointIndex], moveSpeed * Time.deltaTime);
+
+            // Check if the enemy has reached the waypoint
+            if (transform.position == waypoints[currentWaypointIndex])
+            {
+                currentWaypointIndex++;
+            }
+        }
+    }
+}
+
+
+
+
+using UnityEngine;
+
+public class EnemySpawner : MonoBehaviour
+{
+    public GameObject enemyPrefab; // Assign the enemy prefab in the inspector
+
+    void Start()
+    {
+        // Define the waypoints for the first enemy
+        Vector3[] waypoints1 = new Vector3[]
+        {
+            new Vector3(0, 0, 0),
+            new Vector3(1, 0, 0), // one tile forward
+            new Vector3(1, 1, 0)  // one tile up
+        };
+
+        // Define the waypoints for the second enemy
+        Vector3[] waypoints2 = new Vector3[]
+        {
+            new Vector3(5, 0, 0),
+            new Vector3(2, 0, 0), // three tiles back
+        };
+
+        // Instantiate the first enemy and assign waypoints
+        GameObject enemy1 = Instantiate(enemyPrefab, waypoints1[0], Quaternion.identity);
+        enemy1.GetComponent<Enemy>().waypoints = waypoints1;
+
+        // Instantiate the second enemy and assign waypoints
+        GameObject enemy2 = Instantiate(enemyPrefab, waypoints2[0], Quaternion.identity);
+        enemy2.GetComponent<Enemy>().waypoints = waypoints2;
+    }
 }
