@@ -6,21 +6,83 @@ public class EnemyController : MonoBehaviour
 {
     public static EnemyController Instance;
 
-    private void Awake()
+    public float moveSpeed = 5f;
+    public Transform EmovePoint;
+    private bool isMoving = false;
+    private Vector3 previousPosition;
+
+    public LayerMask whatStopsMovement;
+
+    public GameObject Bag;
+
+    void Start()
     {
-        if (Instance == null)
+        Bag = GameObject.FindWithTag("Enemy");
+        EmovePoint.position = new Vector3(12, 1, 0);
+        EmovePoint.parent = null;
+        EmovePoint.position = transform.position;
+        previousPosition = transform.position;
+    }
+
+    void Update()
+    {
+        if (GameManager.Instance.IsEnemyTurn() && !isMoving)
         {
-            Instance = this;
-            DontDestroyOnLoad(gameObject); // Optional: keeps the object persistent across scenes
-            Debug.Log("EnemyController instance set");
-        }
-        else if (Instance != this)
-        {
-            Destroy(gameObject); // There should only be one instance
-            Debug.Log("Duplicate EnemyController destroyed");
+            int EnDirection = Random.Range(1, 5);
+            isMoving = true;
+            Debug.Log(EnDirection);
+            StartCoroutine(MoveEnemy(EnDirection));
         }
     }
 
+    IEnumerator MoveEnemy(int EnDirection)
+    {
+        yield return new WaitForSeconds(0.01f);
+
+        float horizontalInput = 0f;
+        float verticalInput = 0f;
+
+        if (EnDirection == 1)
+        {
+            //verticalInput = 1f;
+            horizontalInput = -1f;
+        }
+        else if (EnDirection == 2)
+        {
+            horizontalInput = -1f;
+        }
+        else if (EnDirection == 3)
+        {
+            //verticalInput = -1f;
+            horizontalInput = 1f;
+        }
+        else if (EnDirection == 4)
+        {
+            horizontalInput = 1f;
+        }
+
+        if (Mathf.Abs(horizontalInput) == 1f || Mathf.Abs(verticalInput) == 1f)
+        {
+            Vector3 targetPosition = EmovePoint.position + new Vector3(horizontalInput, verticalInput, 0f);
+
+            RaycastHit2D hit = Physics2D.Linecast(EmovePoint.position, targetPosition, whatStopsMovement);
+            if (hit.collider == null)
+            {
+                yield return new WaitForSeconds(0.01f);
+
+                while (Vector3.Distance(transform.position, targetPosition) > .05f)
+                {
+                    transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
+                    yield return null;
+                }
+
+                EmovePoint.position = targetPosition;
+            }
+        }
+
+        isMoving = false;
+        GameManager.Instance.EndEnemyTurn();
+    }
 
     public void EnemyTurn()
     {
