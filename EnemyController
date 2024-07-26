@@ -13,11 +13,15 @@ public class EnemyController : MonoBehaviour
 
     public LayerMask whatStopsMovement;
 
+    public GameObject Bag;
+
     public List<Vector3> goalPositions;
     private int currentGoalIndex = 0;
 
     void Start()
     {
+        Bag = GameObject.FindWithTag("Enemy");
+        EmovePoint.position = new Vector3(12, 1, 0);
         EmovePoint.parent = null;
         EmovePoint.position = transform.position;
         previousPosition = transform.position;
@@ -25,9 +29,16 @@ public class EnemyController : MonoBehaviour
         // Initialize the list of goal positions
         goalPositions = new List<Vector3>
         {
-            new Vector3(10, 10, 0), // First goal position
-            new Vector3(5, 5, 0),   // Second goal position
-            new Vector3(0, 0, 0)    // Third goal position
+            new Vector3(10, 1, 0), // First goal position
+            new Vector3(10, 4, 0), // Second goal position
+            new Vector3(9, 4, 0),  // Third goal position
+            new Vector3(9, 6, 0),
+            new Vector3(12, 6, 0),
+            new Vector3(12, 8, 0),
+            new Vector3(7, 8, 0),
+            new Vector3(7, 3, 0),
+            new Vector3(6, 3, 0),
+            new Vector3(6, 1, 0)
         };
     }
 
@@ -44,18 +55,21 @@ public class EnemyController : MonoBehaviour
     {
         yield return new WaitForSeconds(0.01f);
 
-        if (currentGoalIndex >= goalPositions.Count)
-        {
-            // All goals have been reached
-            isMoving = false;
-            GameManager.Instance.EndEnemyTurn();
-            yield break;
-        }
-
         Vector3 goalPosition = goalPositions[currentGoalIndex];
         Vector3 direction = (goalPosition - EmovePoint.position).normalized;
-        float horizontalInput = Mathf.Round(direction.x);
-        float verticalInput = Mathf.Round(direction.y);
+
+        // Determine the next step towards the goal position
+        float horizontalInput = 0f;
+        float verticalInput = 0f;
+
+        if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
+        {
+            horizontalInput = direction.x > 0 ? 1f : -1f;
+        }
+        else
+        {
+            verticalInput = direction.y > 0 ? 1f : -1f;
+        }
 
         Vector3 targetPosition = EmovePoint.position + new Vector3(horizontalInput, verticalInput, 0f);
 
@@ -71,15 +85,21 @@ public class EnemyController : MonoBehaviour
             }
 
             EmovePoint.position = targetPosition;
-        }
 
-        // Check if the enemy has reached the current goal
-        if (Vector3.Distance(EmovePoint.position, goalPosition) < 0.1f)
-        {
-            currentGoalIndex++;
+            // Check if the enemy has reached the goal position
+            if (Vector3.Distance(EmovePoint.position, goalPosition) < 0.1f)
+            {
+                currentGoalIndex = (currentGoalIndex + 1) % goalPositions.Count;
+            }
         }
 
         isMoving = false;
         GameManager.Instance.EndEnemyTurn();
     }
+
+    //public void EnemyTurn()
+    //{
+    //    // Add any logic needed at the start of the enemy's turn here
+    //    GameManager.Instance.EndEnemyTurn();
+    //}
 }
