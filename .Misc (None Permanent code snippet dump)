@@ -1,112 +1,27 @@
-//Enemy move tracker. would go into EnemyController taken from PlayerController
+// placed in the enemy1 script
 
-void Start()
-    {
-        listOfEnemies = GameObject.FindWithTag("Enemy");
-        movePoint.parent = null;
-        movePoint.position = new Vector3(12, 1, 0);
-        transform.position = Vector3.MoveTowards(transform.position, movePoint.position, 1000 * Time.deltaTime);
-        previousPosition = transform.position;
-    }
-
-
-IEnumerator EnemyMoveDelay
-{
-
-	foreach (enemy in enemyID) //enemy and enemyID are place holder names
-	{
-		movePoint.position = enemyPosition; //enemyPosition would be something that is on each enemy per ID
-	
-		if (Mathf.Abs(horizontalInput) == 1f || Mathf.Abs(VerticalInput) == 1f)
-		{
-			Vector3 targetPosition = movePoint.position + new Vector3(horizontalInput, verticalInput, 0f);
-	
-			RaycastHit2D hit = Physics2D.Linecast(movePoint.position, targetPosition, whatStopsMovement);
-			if (hit.collider == null)
-			{
-				yield return new WaitForSeconds(0.2f);
-	
-				while (Vector3.Distance(transform.position, targetPosition) > .05f)
-				{
-					transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
-					yield return null;
-				}
-			
-				movePoint.position = targetPosition;
-			}
-		}
-	}
-	
-	// End the enemies turn after moving
-	GameManager.Instance.EndPlayerTurn();
-	yield break;
-
-}
-
-
-
-
-
-
-//Enemy spawning and creating enemy behavior specific to how each would move
-
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class GoalManager : MonoBehaviour
 {
-    public Vector3[] waypoints; // Array of waypoints for the enemy to follow
-    private int currentWaypointIndex = 0;
-    private float moveSpeed = 2.0f;
+    public static List<Vector3> goalPositions;
 
-    void Update()
+    void Awake()
     {
-        if (currentWaypointIndex < waypoints.Length)
+        goalPositions = new List<Vector3>
         {
-            // Move towards the next waypoint
-            transform.position = Vector3.MoveTowards(transform.position, waypoints[currentWaypointIndex], moveSpeed * Time.deltaTime);
-
-            // Check if the enemy has reached the waypoint
-            if (transform.position == waypoints[currentWaypointIndex])
-            {
-                currentWaypointIndex++;
-            }
-        }
-    }
-}
-
-
-
-
-using UnityEngine;
-
-public class EnemySpawner : MonoBehaviour
-{
-    public GameObject enemyPrefab; // Assign the enemy prefab in the inspector. Or the list of enemies can be aquired by
-				   // looking for the faction tag of enemy
-
-    void Start()
-    {
-        // Define the waypoints for the first enemy
-        Vector3[] waypoints1 = new Vector3[]
-        {
-            new Vector3(0, 0, 0),
-            new Vector3(1, 0, 0), // one tile forward
-            new Vector3(1, 1, 0)  // one tile up
+            new Vector3(10, 1, 0), // First goal position
+            new Vector3(10, 4, 0), // Second goal position
+            new Vector3(9, 4, 0),  // Third goal position
+            new Vector3(9, 6, 0),
+            new Vector3(12, 6, 0),
+            new Vector3(12, 8, 0),
+            new Vector3(7, 8, 0),
+            new Vector3(7, 3, 0),
+            new Vector3(6, 3, 0),
+            new Vector3(6, 1, 0)
         };
-
-        // Define the waypoints for the second enemy
-        Vector3[] waypoints2 = new Vector3[]
-        {
-            new Vector3(5, 0, 0),
-            new Vector3(2, 0, 0), // three tiles back
-        };
-
-        // Instantiate the first enemy and assign waypoints
-        GameObject enemy1 = Instantiate(enemyPrefab, waypoints1[0], Quaternion.identity);
-        enemy1.GetComponent<Enemy>().waypoints = waypoints1;
-
-        // Instantiate the second enemy and assign waypoints
-        GameObject enemy2 = Instantiate(enemyPrefab, waypoints2[0], Quaternion.identity);
-        enemy2.GetComponent<Enemy>().waypoints = waypoints2;
     }
 }
