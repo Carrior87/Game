@@ -6,6 +6,8 @@ public class Enemy1 : BaseEnemy
 {
     public static List<Vector3> goalPositions;
 
+    public int[] spawnLevels;
+
     void Awake()
     {
         goalPositions = new List<Vector3>
