@@ -13,13 +13,13 @@ public class EnemyController : MonoBehaviour
 
     public LayerMask whatStopsMovement;
 
-    public GameObject Bag;
+    public GameObject[] enemyPrefabs;
 
     private int currentGoalIndex = 0;
 
     void Start()
     {
-        Bag = GameObject.FindWithTag("Enemy");
+        //Bag = GameObject.FindWithTag("Enemy");
         EmovePoint.position = new Vector3(12, 1, 0);
         EmovePoint.parent = null;
         EmovePoint.position = transform.position;
@@ -39,7 +39,7 @@ public class EnemyController : MonoBehaviour
     {
         yield return new WaitForSeconds(0.01f);
 
-        Vector3 goalPosition = GoalManager.goalPositions[currentGoalIndex];
+        Vector3 goalPosition = Enemy1.goalPositions[currentGoalIndex];
         Vector3 direction = (goalPosition - EmovePoint.position).normalized;
 
         // Determine the next step towards the goal position
@@ -73,7 +73,7 @@ public class EnemyController : MonoBehaviour
             // Check if the enemy has reached the goal position
             if (Vector3.Distance(EmovePoint.position, goalPosition) < 0.1f)
             {
-                currentGoalIndex = (currentGoalIndex + 1) % GoalManager.goalPositions.Count;
+                currentGoalIndex = (currentGoalIndex + 1) % Enemy1.goalPositions.Count;
             }
         }
 
