@@ -1,27 +1,44 @@
-// placed in the enemy1 script
+//some is already implemented in EnemyController. currentLevel would need to be aquired from GridManager
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class GoalManager : MonoBehaviour
+public class EnemyManager : MonoBehaviour
 {
-    public static List<Vector3> goalPositions;
+    public GameObject[] enemyPrefabs; // Array of all possible enemy prefabs
+    public Transform[] spawnPoints;   // Array of spawn points
+    private int currentLevel;
 
-    void Awake()
+    // Set the current level (this could be set from another part of your game)
+    public void SetCurrentLevel(int level)
     {
-        goalPositions = new List<Vector3>
+        currentLevel = level;
+        SpawnEnemiesForCurrentLevel();
+    }
+
+    private void SpawnEnemiesForCurrentLevel()
+    {
+        foreach (GameObject enemyPrefab in enemyPrefabs)
         {
-            new Vector3(10, 1, 0), // First goal position
-            new Vector3(10, 4, 0), // Second goal position
-            new Vector3(9, 4, 0),  // Third goal position
-            new Vector3(9, 6, 0),
-            new Vector3(12, 6, 0),
-            new Vector3(12, 8, 0),
-            new Vector3(7, 8, 0),
-            new Vector3(7, 3, 0),
-            new Vector3(6, 3, 0),
-            new Vector3(6, 1, 0)
-        };
+            Enemy enemy = enemyPrefab.GetComponent<Enemy>();
+            if (enemy != null && ShouldSpawn(enemy))
+            {
+                // Spawn the enemy at a random spawn point or according to your game logic
+                Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
+                Instantiate(enemyPrefab, spawnPoint.position, spawnPoint.rotation);
+            }
+        }
+    }
+
+    private bool ShouldSpawn(Enemy enemy)
+    {
+        // Check if the current level is in the enemy's spawnLevels array
+        foreach (int level in enemy.spawnLevels)
+        {
+            if (level == currentLevel)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 }
