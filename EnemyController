@@ -14,6 +14,7 @@ public class EnemyController : MonoBehaviour
     public LayerMask whatStopsMovement;
 
     public GameObject[] enemyPrefabs;
+    public Transform[] spawnPoints;
 
     private int currentGoalIndex = 0;
 
