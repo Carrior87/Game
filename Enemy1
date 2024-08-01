@@ -1,0 +1,25 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Enemy1 : BaseEnemy
+{
+    public static List<Vector3> goalPositions;
+
+    void Awake()
+    {
+        goalPositions = new List<Vector3>
+        {
+            new Vector3(10, 1, 0), // First goal position
+            new Vector3(10, 4, 0), // Second goal position
+            new Vector3(9, 4, 0),  // Third goal position
+            new Vector3(9, 6, 0),
+            new Vector3(12, 6, 0),
+            new Vector3(12, 8, 0),
+            new Vector3(7, 8, 0),
+            new Vector3(7, 3, 0),
+            new Vector3(6, 3, 0),
+            new Vector3(6, 1, 0)
+        };
+    }
+}
