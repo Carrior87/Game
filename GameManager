@@ -62,11 +62,11 @@ public class GameManager : MonoBehaviour
             case GameState.EnemiesTurn:
                 if (EnemyController.Instance != null)
                 {
-                    EnemyController.Instance.EnemyTurn();
+                    //EnemyController.Instance.EnemyTurn();
                 }
                 else
                 {
-                    Debug.LogError("EnemyController instance is null");
+                    //Debug.LogError("EnemyController instance is null");
                 }
                 break;
             case GameState.Interaction:
@@ -84,10 +84,19 @@ public class GameManager : MonoBehaviour
         return GameState == GameState.HeroesTurn;
     }
 
+    public bool IsEnemyTurn()
+    {
+        return GameState == GameState.EnemiesTurn;
+    }
+
     public void EndPlayerTurn()
     {
         enCounter++;
         Debug.Log("EnCounter Chance = " + enCounter);
+        if (enCounter == 10){
+            enCounter = 0;
+            Debug.Log("EnCounter!");
+        }
         ChangeState(GameState.EnemiesTurn);
         // Add logic to handle the start of the enemy's turn
     }
