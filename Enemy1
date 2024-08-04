@@ -5,8 +5,7 @@ using UnityEngine;
 public class Enemy1 : BaseEnemy
 {
     public static List<Vector3> goalPositions;
-
-    public int[] spawnLevels;
+    public Transform spawnPoints;
 
     void Awake()
     {
