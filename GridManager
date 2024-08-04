@@ -119,7 +119,9 @@ public class GridManager : MonoBehaviour
 
     public Tile GetEnemySpawnTile()
     {
-        return _tiles.Where(t => t.Key.x > _width / 2 && t.Value.Walkable).OrderBy(t => Random.value).First().Value;
+        //return _tiles.Where(t => t.Key.x > _width / 2 && t.Value.Walkable).OrderBy(t => Random.value).First().Value;
+        //as its currently one enemy this coord is where the bag is spawned (Bag is a place holder enemy)
+        return _tiles.FirstOrDefault(t => t.Key.x == 9 && t.Key.y == 1).Value;
     }
 
     public Tile GetTileAtPosition(Vector2 pos)
