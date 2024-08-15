@@ -6,6 +6,8 @@ public class EnemyController : MonoBehaviour
 {
     public static EnemyController Instance;
 
+    private Enemy1 enemyLocation;
+
     public float moveSpeed = 5f;
     public Transform EmovePoint;
     private bool isMoving = false;
@@ -15,7 +17,6 @@ public class EnemyController : MonoBehaviour
 
     public GameObject[] enemyPrefabs;
     //make prefabs located at the coords these enemies are going to be spawned at. or just hard code it. its like 1-3 FOE's per level so its not gonna be 'that' bad
-    public Transform[] spawnPoints;
 
     private int currentGoalIndex = 0;
 
@@ -26,6 +27,15 @@ public class EnemyController : MonoBehaviour
         //EmovePoint.parent = null;
         EmovePoint.position = transform.position;
         previousPosition = transform.position;
+
+        enemyLocation = GetComponent<Enemy1>();
+
+        if(enemyLocation != null)
+        {
+            Debug.Log("X: " + enemyLocation.X);
+            Debug.Log("Y: " + enemyLocation.Y);
+            Debug.Log("Level: " + enemyLocation.Level);
+        }
     }
 
     void Update()
