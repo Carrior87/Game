@@ -26,11 +26,21 @@ public class UnitManager : MonoBehaviour
 
         for (int i = 0; i < heroCount; i++)
         {
-            var randomPrefab = GetRandomUnit<BaseHero>(Faction.Hero);
-            var spawnedHero = Instantiate(randomPrefab);
-            var randomSpawnTile = GridManager.Instance.GetHeroSpawnTile();
+            var orderedHeroPrefab = GetUnitByOrder<BaseHero>(Faction.Hero, i);
+            if (orderedHeroPrefab != null)
+            {
+                var spawnedHero = Instantiate(orderedHeroPrefab);
+                var spawnTile = GridManager.Instance.GetHeroSpawnTile();
 
-            //randomSpawnTile.SetUnit(spawnedHero);
+                if (spawnTile != null)
+                {
+                    spawnTile.SetUnit(spawnedHero);
+                }
+                else
+                {
+                    Debug.LogError("No valid spawn tile found for hero.");
+                }
+            }
         }
 
         GameManager.Instance.ChangeState(GameState.SpawnEnemies);
@@ -38,24 +48,49 @@ public class UnitManager : MonoBehaviour
 
     public void SpawnEnemies()
     {
-        var enemyCount = 1;
+        var enemyCount = 2;
 
         for (int i = 0; i < enemyCount; i++)
         {
-            var randomPrefab = GetRandomUnit<BaseEnemy>(Faction.Enemy);
-            var spawnedEnemy = Instantiate(randomPrefab);
-            var randomSpawnTile = GridManager.Instance.GetEnemySpawnTile();
+            var orderedEnemyPrefab = GetUnitByOrder<BaseEnemy>(Faction.Enemy, i);
+            if (orderedEnemyPrefab != null)
+            {
+                var spawnedEnemy = Instantiate(orderedEnemyPrefab);
+                var spawnTile = GridManager.Instance.GetEnemySpawnTile(spawnedEnemy);
 
-            randomSpawnTile.SetUnit(spawnedEnemy);
+                if (spawnTile != null)
+                {
+                    spawnTile.SetUnit(spawnedEnemy);
+                }
+                else
+                {
+                    Debug.LogError("No valid spawn tile found for enemy.");
+                }
+            }
         }
 
         GameManager.Instance.ChangeState(GameState.HeroesTurn);
     }
 
-    private T GetRandomUnit<T>(Faction faction) where T : BaseUnit
+    private T GetUnitByOrder<T>(Faction faction, int order) where T : BaseUnit
     {
-        return (T)_units.Where(u => u.Faction == faction).OrderBy(o => Random.value).First().UnitPrefab;
+        var unitList = _units.Where(u => u.Faction == faction)
+                             .OrderBy(u => u.UnitOrder)
+                             .Distinct()
+                             .ToList();
+
+        // Ensure the order is within the range of the list
+        if (order >= 0 && order < unitList.Count)
+        {
+            return (T)unitList[order].UnitPrefab;
+        }
+
+        // Handle cases where the order is out of range
+        Debug.LogError($"No unit found for order {order}");
+        return null;
     }
+
+
 
     //public void SetSelectedHero(BaseHero hero)
     //{
