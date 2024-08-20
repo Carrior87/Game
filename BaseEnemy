@@ -7,5 +7,5 @@ public class BaseEnemy : BaseUnit
     public int X;
     public int Y;
     public int Level;
-
+    public List<Vector3> goalPositions;
 }
