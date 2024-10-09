@@ -1,0 +1,302 @@
+Vangaurd | Focus: Tank/Damage Negation
+
+Shield Bash: (Active)
+Hit the enemy with your shield. Chance to put the enemy into a stunned state
+
+Uneasy Aura: (Passive)
+Enemies are more likely to attack you
+
+Frontline Defense: (Active)
+The parties frontline gains increased defense for x amount of rounds
+
+Backline Defense: (Active)
+The parties backline gains increased defense for x amount of rounds
+
+All Defense: (Active)
+The party gains increased defense for x amount of rounds
+
+Targeted Deflection: (Active)
+Share a portion of damage taken with another party member. THe other party members damage is reduced by x%
+
+Reverberation: (Active)
+Absorb damage for 1 round and unleash it back on the enemy at the end of the round
+
+Holy strike: (Active)
+Bask the enemy party in Holy light which strikes one at random with volt damage
+
+Rally: (Passive)
+Increase defense for each hit taken. The parties defense increases as well but at a smaller amount per hit to the Vangaurd
+
+Block: (Active)
+Ready your shield to block an attack
+
+Body Gaurd: (Active)
+Select a party member to protect. Any damage they would take is instead taken by the Vangaurd up to a certain percentage.
+The remaining damage is taken by the party member
+
+
+
+Warrior | Focus: Damage
+
+Warcry: (Active)
+Increases attack damage at expence of defense
+
+Rampage: (Active)
+By sacraficing health deal a powerful blow on one enemy
+
+Revelry: (Passive)
+Heal after killing an enemy
+
+Momentum: (Passive)
+Increase attack damage per kill
+
+Berserkers Might: (Passive)
+The lower your health the more your defense increases and slightly increases the Warriors damage
+
+Bloodlust: (Passive)
+Increase attack damage to the last enemy to damage the Warrior
+
+Giants Bane: (Active)
+If the Warrior has less health than the selected enemy increase attack damage by a percentage equal to the health disparity
+
+Hellish Blow: (Active)
+A single target attack that increases damage the lower the users health. If missed the user takes the damage and is stunned for one round
+
+Wild Swings: (Active)
+Hits the enemy party x amount of times at random
+
+Wide Strike: (Active)
+The warrior hits the enemy parties front or back line dealing damage to all enemies in the selected line
+
+
+
+Fencer | Focus: Counter/Evasion
+
+Tempo: (Passive)
+Hitting the same enemy increases attack damage to that enemy, resetting if another enemy is attacked by the Fencer
+
+Swift Strike: (Active)
+Attack an enemy. This attack always goes first in the round
+
+Duel Wield: (Passive)
+Reduces the damage penalty of equiping a second weapon
+
+Near Miss: (Passive)
+The Fencer has a chance if hit to lower the damage taken by x%
+
+Chasing Attack: (Active)
+Select a party member who after attacking the Fencer will chase thier attack dealing increased damage
+
+Counter: (Active)
+The Fencer readies themselves to parry and reposte an attack
+
+Flurry: (Active)
+An attack that hits the enemy party x amount of times
+
+Follow Up: (Passive)
+The Fencer has an x% chance to attack a second time
+
+Disengage: (Active)
+Attack an enemy then move to the backline
+
+Forward Thrust: (Active)
+Move to the front lines and attack the enemy
+
+
+
+Rogue | Focus: Bind/Debilitation Effects
+
+Stealth: (Passive)
+Lowers the chance enemies will attack the Rogue
+
+Known Tricks: (Passive)
+Lowers the chance of binds working on the Rogue
+
+Head Bind: (Active)
+Binds the enemies head
+
+Arm Bind: (Active)
+Binds the enemies Arms
+
+Leg Bind: (Active)
+Binds the enemies Legs
+
+Sleep Bomb: (Active)
+Enduces sleep on the enemy party
+
+Paralysis Bomb: (Active)
+Enduces Paralysis on the enemy party
+
+Blinding Bomb: (Active)
+Enduces Blindness on the enemy party
+
+Shrapnel Bomb: (Active)
+An exploding bomb dealing damage to the enemy party
+
+Weak Spot: (Active)
+Study an enemy and point out the element or weapon type they are weak to. If all weaknesses are already know increase damage to 
+that enemy for one of thier weaknesses types
+
+Unbind: (Active)
+Unbind a selected party member
+
+Ambush: (Passive)
+Increase the chance of a preemptive attack when entering a battle
+
+Keen Eye: (Passive)
+Lower the chance of the enemy getting a preemptive attack when entering a battle
+
+Close Combat: (Passive)
+If an attack made on the Rogue misses the hit is instead taken by a random enemy other than the one making the attack
+
+
+
+Elemancer | Focus: Elemental Damage
+
+Fire Blast: (Active)
+The Elemancer conjures forth a single target attack dealing fire damage
+
+Fire Up: (Passive)
+Increase the Elemancers fire damage
+
+Explosion: (Active)
+The Elemancer generates a blazing flame in the middle of the enemy party damaging them all as it explodes
+
+Ice Shot: (Active)
+The Elemancer conjures forth a single target attack dealing ice damage
+
+Ice Up: (Passive)
+Increase the Elemancers ice damage
+
+Ice Spike: (Active)
+The Elemancer Creates an icicle structure that branches out to attack all enemies
+
+Volt Strike: (Active)
+The Elemancer conjures forth a single target attack dealing volt damage
+
+Volt Up: (Passive)
+Increase the Elemancers volt damage
+
+Storming Strike: (Active)
+The Elemancer Summons a raging storm above the enemy party eletricuting all enemies as they are struck with lightning
+
+Empower: (Active)
+Strengthen the next elemental attack
+
+Elemental Mastery: (Passive)
+Lower MP cost of all Fire, Ice, and Volt skills
+
+Mana Syphon: (Passive)
+Killing enemies replenishes mana
+
+
+
+Bard | Focus: Buffs/Stat Increases
+
+Encouraging Song: (Active)
+Reduce debuff chance and boost the recovery time of the party from affecting debuffs
+
+Power Cord: (Active)
+Enhances a party members next attack
+
+Ballad: (Passive)
+Increases exp gain
+
+Sooth Song: (Active)
+Removes debuffs from selected party members
+
+Re-Enforcing Anthem: (Active)
+Increase defense of the entire party
+
+Protecting Hymn: (Active)
+Provides a shield for x% amount of damage to a selected party member
+
+Lullaby: (Active)
+An attack that attempts to sleep all enemies
+
+Rejuvinating Song: (Active)
+Heal mana and a small amount of health to the entire party
+
+Encore: (Active)
+A selected party member acts a second time using the same skill/attack. If the party memeber used a cd skill they will use thier basic attack instead
+
+Slayers Song: (Active)
+Increases the attack of all party members
+
+Echoing Shout: (Active)
+An attack that stuns all enemies
+
+
+
+Shaman | Focus: Summoning/Rituals
+
+Poisoning rite: (Active)
+Start a ritual to poison the enemy. The ritual lasts 3 rounds with a chance to poison the enemy increases with each round till the ritual ends
+
+Curse: (Active)
+Enduce Curse on the enemy
+
+Charm: (Active)
+If successful the selected enemy attack members of the enemy party for x amount of rounds
+
+Enduction: (Passive)
+Increases the chances of debuffs affecting the enemy
+
+Power Ritual: (Active)
+Start a ritual increasing the attack and defense of summons. The ritual lasts x rounds
+
+Replenishing Ritual: (Active)
+Start a ritual to heal the party. The ritual lasts x rounds. The effects of the ritual increase if a summon was sacrificed one round before starting
+
+Immobalizing Ritual: (Active)
+Start a ritual to bind the enemy party. The ritual lasts x rounds. Each rounds has a chance of binding the enemy once with a random chance of it binding either the head, arms, or legs. 
+If the enemy is already bound in the head (for example) another part of the enemy will be bound instead i.e. the arms or legs
+
+Sacrifice: (Active)
+Kill a summon to return x% of mana back to the shaman and damage an enemy line
+
+Offensive Spirit: (Active)
+Summon a spirit that has an increased attack and lowered defense
+
+Defensive Spirit: (Active)
+Summon a spirit that has an increased defense and a lowered attack
+
+Resurrecting Ritual: (Active)
+Start a ritual to revive fallen party members. The ritual lasts 3 rounds. On all rounds while the ritual is active a party member will be revived and every round after the party member(s) will be healed
+
+Auto-Summon: (Passive)
+The Shaman has a chance to start the battle with a random summon
+
+
+
+Herbalist | Focus: Healing/Lethal debuffs
+
+Revive: (Active)
+The Herbalist Revives one fallen party member and heals them by x%
+
+Heal: (Active)
+Heals a party member by x%
+
+Aid: (Active)
+Heals a party line by x%
+
+Cure: (Active)
+Heals the party by x%
+
+Purify: (Active)
+Removes debuffs form a selected party line
+
+Poison Salve: (Active)
+Enduce poison to a selected enemy
+
+Petrifing Salve: (Active)
+Enduce petrification to a selected enemy
+
+Paralyzing Salve: (Active)
+Enduce paralysis to a selected enemy
+
+Incense: (Active)
+Heals the party over x amount of rounds. This occurs in tandem with the herbalists turns and does not take up the turn such as the Shamans does. After use this skill goes on cd
+
+Herbal Potency: (Passive)
+Increases the power of healing skills
