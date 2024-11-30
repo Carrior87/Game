@@ -1,5 +1,7 @@
 Vangaurd | Focus: Tank/Damage Negation
 
+Subclass Ideas: Bulwark, Champion
+
 Shield Bash: (Active)
 Hit the enemy with your shield. Chance to put the enemy into a stunned state
 
@@ -38,6 +40,8 @@ The remaining damage is taken by the party member
 
 Warrior | Focus: Damage
 
+Subclass Ideas: Berzerker, Mercenary, Navigator
+
 Warcry: (Active)
 Increases attack damage at expence of defense
 
@@ -72,6 +76,8 @@ The warrior hits the enemy parties front or back line dealing damage to all enem
 
 Fencer | Focus: Counter/Evasion
 
+Subclass Ideas: Ronin, Duelist, Royal Arms(can use a shield)
+
 Tempo: (Passive)
 Hitting the same enemy increases attack damage to that enemy, resetting if another enemy is attacked by the Fencer
 
@@ -79,7 +85,7 @@ Swift Strike: (Active)
 Attack an enemy. This attack always goes first in the round
 
 Duel Wield: (Passive)
-Reduces the damage penalty of equiping a second weapon
+Reduces the damage penalty of equipping a second weapon
 
 Near Miss: (Passive)
 The Fencer has a chance if hit to lower the damage taken by x%
@@ -102,9 +108,14 @@ Attack an enemy then move to the backline
 Forward Thrust: (Active)
 Move to the front lines and attack the enemy
 
+Hajakure: (Passive)
+On the death of the user make one final attack on a random enemy. Usable once per battle
+
 
 
 Rogue | Focus: Bind/Debilitation Effects
+
+Subclass Ideas: Trapper, Trickster
 
 Stealth: (Passive)
 Lowers the chance enemies will attack the Rogue
@@ -147,11 +158,16 @@ Keen Eye: (Passive)
 Lower the chance of the enemy getting a preemptive attack when entering a battle
 
 Close Combat: (Passive)
-If an attack made on the Rogue misses the hit is instead taken by a random enemy other than the one making the attack
+If an attack made on the Rogue misses the hit is instead taken by a random enemy
 
 
 
-Elemancer | Focus: Elemental Damage
+Mage | Focus: Elemental Damage
+
+Subclass Ideas: Elemancer, Occultist
+
+Wild magic: (Active)
+x% chance to turn the enemy into a frog
 
 Fire Blast: (Active)
 The Elemancer conjures forth a single target attack dealing fire damage
@@ -193,6 +209,8 @@ Killing enemies replenishes mana
 
 Bard | Focus: Buffs/Stat Increases
 
+Subclass Ideas: Busker, Herald
+
 Encouraging Song: (Active)
 Reduce debuff chance and boost the recovery time of the party from affecting debuffs
 
@@ -229,6 +247,8 @@ An attack that stuns all enemies
 
 
 Shaman | Focus: Summoning/Rituals
+
+Subclass Ideas: 
 
 Poisoning rite: (Active)
 Start a ritual to poison the enemy. The ritual lasts 3 rounds with a chance to poison the enemy increases with each round till the ritual ends
@@ -270,6 +290,8 @@ The Shaman has a chance to start the battle with a random summon
 
 
 Herbalist | Focus: Healing/Lethal debuffs
+
+Subclass Ideas: 
 
 Revive: (Active)
 The Herbalist Revives one fallen party member and heals them by x%
