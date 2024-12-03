@@ -115,7 +115,7 @@ On the death of the user make one final attack on a random enemy. Usable once pe
 
 Rogue | Focus: Bind/Debilitation Effects
 
-Subclass Ideas: Trapper, Trickster
+Subclass Ideas: Trapper, Trickster, Charlatan/Swindler
 
 Stealth: (Passive)
 Lowers the chance enemies will attack the Rogue
@@ -208,6 +208,8 @@ Killing enemies with magic attacks replenishes mana
 Momentum: (Active)
 The user builds up power each time the spell is used. Once the user casts a offensive spell the daamge is added to that spell
 
+
+
 Bard | Focus: Buffs/Stat Increases
 
 Subclass Ideas: Busker, Herald
@@ -249,7 +251,7 @@ An attack that stuns all enemies
 
 Shaman | Focus: Summoning/Rituals
 
-Subclass Ideas: Conjurer
+Subclass Ideas: Conjurer, Illusionist
 
 Poisoning rite: (Active)
 Start a ritual to poison the enemy. The ritual lasts 3 rounds with a chance to poison the enemy increases with each round till the ritual ends
@@ -292,7 +294,7 @@ The Shaman has a chance to start the battle with a random summon
 
 Herbalist | Focus: Healing/Lethal debuffs
 
-Subclass Ideas: 
+Subclass Ideas: Witch Doctor, Cleric
 
 Revive: (Active)
 The Herbalist Revives one fallen party member and heals them by x%
@@ -323,3 +325,6 @@ Heals the party over x amount of rounds. This occurs in tandem with the herbalis
 
 Herbal Potency: (Passive)
 Increases the power of healing skills
+
+Detoxify: (Active)
+Remove a debuff from a party member
