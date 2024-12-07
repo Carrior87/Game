@@ -1,6 +1,6 @@
 Vangaurd | Focus: Tank/Damage Negation
 
-Subclass Ideas: Bulwark, Champion
+Specialization Ideas: Bulwark, Champion
 
 Shield Bash: (Active)
 Hit the enemy with your shield. Chance to put the enemy into a stunned state
@@ -40,7 +40,7 @@ The remaining damage is taken by the party member
 
 Warrior | Focus: Damage
 
-Subclass Ideas: Berzerker, Mercenary, Navigator
+Specialization Ideas: Berzerker, Mercenary, Navigator
 
 Warcry: (Active)
 Increases attack damage at expence of defense
@@ -76,7 +76,7 @@ The warrior hits the enemy parties front or back line dealing damage to all enem
 
 Fencer | Focus: Counter/Evasion
 
-Subclass Ideas: Ronin, Duelist, Royal Arms(can use a shield)
+Specialization Ideas: Ronin, Duelist, Royal Arms(can use a shield)
 
 Tempo: (Passive)
 Hitting the same enemy increases attack damage to that enemy, resetting if another enemy is attacked by the Fencer
@@ -115,7 +115,7 @@ On the death of the user make one final attack on a random enemy. Usable once pe
 
 Rogue | Focus: Bind/Debilitation Effects
 
-Subclass Ideas: Trapper, Trickster, Charlatan/Swindler
+Specialization Ideas: Trapper, Trickster, Charlatan/Swindler
 
 Stealth: (Passive)
 Lowers the chance enemies will attack the Rogue
@@ -164,7 +164,7 @@ If an attack made on the Rogue misses the hit is instead taken by a random enemy
 
 Mage | Focus: Elemental Damage
 
-Subclass Ideas: Elemancer, Battle Mage
+Specialization Ideas: Elemancer, Battle Mage
 
 Wild magic: (Active)
 x% chance to turn the enemy into a harmless animal
@@ -212,7 +212,7 @@ The user builds up power each time the spell is used. Once the user casts a offe
 
 Bard | Focus: Buffs/Stat Increases
 
-Subclass Ideas: Busker, Herald
+Specialization Ideas: Busker, Herald
 
 Encouraging Song: (Active)
 Reduce debuff chance and boost the recovery time of the party from affecting debuffs
@@ -251,7 +251,7 @@ An attack that stuns all enemies
 
 Shaman | Focus: Summoning/Rituals
 
-Subclass Ideas: Conjurer, Illusionist
+Specialization Ideas: Conjurer, Illusionist
 
 Poisoning rite: (Active)
 Start a ritual to poison the enemy. The ritual lasts 3 rounds with a chance to poison the enemy increases with each round till the ritual ends
@@ -294,7 +294,7 @@ The Shaman has a chance to start the battle with a random summon
 
 Herbalist | Focus: Healing/Lethal debuffs
 
-Subclass Ideas: Witch Doctor, Cleric
+Specialization Ideas: Witch Doctor, Cleric
 
 Revive: (Active)
 The Herbalist Revives one fallen party member and heals them by x%
