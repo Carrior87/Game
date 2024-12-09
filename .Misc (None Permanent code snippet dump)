@@ -42,3 +42,61 @@ public class EnemyManager : MonoBehaviour
         return false;
     }
 }
+
+
+
+
+
+
+switch (newstate)
+{
+	//above code is still going to be here but I dont need to touch it right now
+	case GameState.Battle:
+		GameManager.Loadscene(sceneBattle);
+		ChangeState(GameState.BattleHeroTurn);
+		//get enemies
+		//get party
+		//turn order depends on speed and does not change based on skills at this point
+		break;
+
+	case GameState.BattleHeroTurn:
+		//choose attack/skills then move to the next party member till all have one chosen
+		//once all have chosen ask player if they are sure
+		//any change to turn order?
+		break;
+
+	case GameState.BattleEnemyTurn:
+		//choose attack/skill through random number then target move to the next enemy
+		break;
+
+	caseGameState.BattleActionTurn:
+		//execute attacks based on turn order
+		break;
+}
+
+
+
+
+list with 5 slots for each attack/skill the party memeber will do
+(5 member party if 4 member list is reduced to 4 slots and so on)
+
+Enemy attack/skill is decided through random number gen and the member they attack is based on 
+random chance and/or aggro stat if a player ability effects who they are attacking other measures 
+must be taken for getting who they are supposed to attack
+
+if (randomEx = true)
+{
+	attackWho = randomNumber; //randomnumber is at a minimum 1 and a max 5 based on party size
+}
+else
+{
+	attackWho = highestAggro;
+}
+
+
+
+
+
+
+
+
