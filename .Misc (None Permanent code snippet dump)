@@ -95,8 +95,95 @@ else
 
 
 
+List<List<object>> GuildRoster = new List<List<object>>();
+List<List<object>> Party = new List<List<object>>();
+
+click create guild member button
+select class, // this fills out the Cls stats
+portrait, // just visual but fills out the spriteRef
+name // fills in the characterName
+click finish
+the character is added to the guild roster through GuildRoster.Add(Character)
+
+click Party                                                                                                                   [ ][ ][ ]
+Click Formation                                                                                                               [ ][ ][ ]
+List all Guild Members in Guild Roster that we can scroll through and a menu showing the formation slots (looks something like this^ showing 6 slots)
+clicking or hitting space selects the Guild Member, it moves to the formation slots and lets you click or hit space to decide which slot they are in (if a guild member is already in that spot it doesnt let you select it)
+it then sets you back to the guild member selection to repeat the process graying out the members already in the formation
+max party count is 5 min is 1
+since you dont need to fill in the formation completely you can arrow over or click a done button when on formation slots or hit escape if your not on the formation slots
+
+List<object> Character = new List<object> 
+        {
+            characterName,     // Name
+	    characterClass,    //Class
+	    spriteRef,         // Character Portrait
+            1,                 // Level Number -- Hardcoded since all classes start at level one
+            ClsHP,             // HP
+            ClsMP,             // MP
+            ClsSTR,            // STR  
+            ClsARC,            // ARC
+	    ClsVIT,            // VIT
+	    ClsAGI,            // AGI
+	    ClsLUC,            // LUC
+	    ClsPts,	       //Class Points
+        }; 
+
+GuildRoster.Add(Character);
+
+// Add Character to Party at a specific index
+// Not sure how I want to set the desired index just yet so hardcoding is fine for now
+
+//allows the addition of party members
+while (Party.Count < 5)
+{
+    Party.Add(new List<object>(EmptySlot));
+}
+
+// Replace the member at a specific index
+int replaceIndex = 0; // Index to replace (e.g., first member)
+if (replaceIndex >= 0 && replaceIndex < Party.Count)
+{
+    Party[replaceIndex] = Character0; // Replace member at index
+}
+else
+{
+    Console.WriteLine("Index out of range! Cannot replace character in Party.");
+}
+
+if (Party.Count > 5)
+{
+    Console.WriteLine("Party is full! Cannot add more members.");
+}
 
 
 
 
+
+if (GuildMembers[i][0] == "")
+{
+	//open the character select screen
+}
+
+
+
+
+
+battle system from a tutorial:
+on a canvas we can add the buttons neccissary but not sure how I want the action menu to look,
+will probably just rip it from EO
+to make a button functional a script should be added to it so it can be called in code
+(in inspector add the button component to the button)
+[SerializedField]
+private bool attack;
+
+void Start()
+{
+	string temp = gameobject.name;
+	gameObject.GetComponent<Button>().onClick.AddListener(() => AttachCallback(temp));
+}
+private void AttachCallback(string btn)
+{
+	
+}
 
